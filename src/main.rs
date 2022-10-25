@@ -142,9 +142,8 @@ fn check_for_updates(desired_path: &Path) -> Result<(), Error> {
     return Ok(());
 }
 fn main() -> Result<(), Error> {
-    if std::env::consts::OS == "windows" {
-        control::set_virtual_terminal(true).unwrap();
-    }
+    #[cfg(target_os = "windows")]
+    control::set_virtual_terminal(true).unwrap();
 
     let args: Vec<String> = std::env::args().collect();
 
